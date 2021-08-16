@@ -1,0 +1,46 @@
+<form [formGroup]='patientForm'>
+    <mat-form-field appearance="fill">
+        <mat-label>Patient Name</mat-label>
+        <input matInput formControlName ="PatientName" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label> Age</mat-label>
+         <input matInput  formControlName ="Age" type='number' required minlength="1"> 
+      </mat-form-field><br>
+      <mat-radio-group aria-label="Select an option" formControlName ="Gender">
+        
+        <mat-radio-button value="Male">Male</mat-radio-button> &nbsp;&nbsp;
+        <mat-radio-button value="Female">Female</mat-radio-button><br><br>
+      </mat-radio-group>
+      <mat-form-field appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput  formControlName ="Address" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput  formControlName ="Email" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>City</mat-label>
+        <input matInput  formControlName ="City" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput  formControlName ="MobileNumber" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>symtoms</mat-label>
+        <mat-select [formControl]="symtoms" multiple  [(ngModel)]="selected" (selectionChange)="filter($event)" [(value)]="selected">
+          <mat-select-trigger>
+            {{symtoms.value ? symtoms.value[0] : ''}}
+            <span *ngIf="symtoms.value?.length > 1" class="example-additional-selection">
+              (+{{symtoms.value.length - 1}} {{symtoms.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let symtomss of symtomList" [value]="symtoms">{{symtomss}}</mat-option>
+        </mat-select>
+      </mat-form-field><br><br>
+      <button mat-raised-button color='primary' (click)="SaveForm()" [disabled]="!patientForm.valid">Save</button> &nbsp;
+      <button mat-raised-button color='primary' >Cancel</button>
+
+   </form>
